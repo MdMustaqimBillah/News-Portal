@@ -1,0 +1,35 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block title_block %} {{ ad.title }} {% endblock %}
+{% block style_block %}
+
+<style>
+.home{
+    margin-top: 75px;
+}
+</style>
+
+{% endblock %}
+
+{% block body_block %}
+<div class="row home">
+    <div class="col-2"></div>
+
+    <div class="container px-5 col-8">
+
+        <img style="width: 98%; height: 340px;" src="{{ ad.image.url }}" alt="{{ ad.title }}" class="mt-2 rounded">
+        
+        <div style="text-align: justify; width: 98%;">
+            <h1> {{ ad.company }} </h1>
+            <hr>
+            <p>
+            {{ ad.description_ad|linebreaks }}
+            </p>
+        </div>
+
+    </div>
+
+    <div class="col-2"></div>
+</div><!-- the main row ends here -->
+
+{% endblock %}

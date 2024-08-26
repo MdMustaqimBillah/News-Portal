@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title_block %} Update Article {% endblock %}
+
+
+{% block style_block %}
+
+<style>
+    form{
+        width: 40%;
+        margin: auto;
+        padding: 2%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        border: 1px;
+        }
+    p{
+        margin-top: 5px;
+        margin-bottom: 0px;
+        font: Times New Roman;
+    }
+    button{
+        width:100%;
+        margin-top: 2%;
+    }
+    hr{
+        width: 50%;
+        margin: auto;
+        margin-top: 0%;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block form_block %}
+
+ <form method="POST"  enctype="multipart/form-data" class="rounded bg-body-tertiary shadow ">
+    <center><h6>Update the Article</h6></center>
+    <hr>
+    {{ form|crispy }}
+    {% csrf_token %}
+    <center>
+    <button type="submit" class="btn btn-primary"> Update </button>
+    </center>
+ </form>
+
+{% endblock %}

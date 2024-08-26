@@ -1,0 +1,236 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block title_block %} Home {% endblock %}
+
+{% block style_block %}
+
+<style>
+    .containner{
+        padding-top: 1%;
+        margin-left: 1%;
+        margin-right: 1%;
+    } 
+    .home{
+        margin-top: 75px;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block body_block %}
+<div class="row home">
+    <div class="col-9">
+        <div class="row border-bottom border-end px-3 py-2" style="height: 300px;">
+            <div class="col-6">
+                {% if main_article %}
+                <a href="{% url 'NewsApp:details' slug=main_article.slug %}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+                <img src="{{ main_article.image.url }}" alt="image not found" class="main_article_image" style="width: 100%; height: 275px;">
+                </a>
+                {% else %}
+                <p>No image available</p>
+                {% endif %}
+            </div>
+            <div class="col-6">
+                {% if main_article %}
+                <a href="{% url 'NewsApp:details' slug=main_article.slug %}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+                <h1>{{ main_article.title }}</h1>
+                <p style="color: rgb(161, 161, 161); font-size:small;">{{ main_article.content|truncatewords:20 }}...</p>
+                <p style="font-size: xx-small;"><b>Published on :</b> {{ main_article.created }} </p>
+                </a>
+                {% else %}
+                <p>No articles available</p>
+                {% endif %}
+            </div>
+        </div> <!-- inner row div ends here -->
+<div class="row px-3 py-2 border-end border-bottom">
+    <div class="col-4 other_news border-end pe-0">
+        {% if r2c1 %}  
+        <a href="{% url 'NewsApp:details' slug=r2c1.slug %}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <img src="{{r2c1.image.url}}" style="width: 96%; height: 150px; margin-right: auto;" >
+        <h6> {{ r2c1.title }} </h6>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r2c1.created}} </p> </a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+    <div class="col-4 other_news border-end pe-0">
+        {% if r2c2 %}
+        <a href="{% url 'NewsApp:details' slug=r2c2.slug %}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <img src="{{r2c2.image.url}}" style="width: 96%; height: 150px; margin-right: auto;" >
+        <h6> {{ r2c2.title }} </h6>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r2c2.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+    <div class="col-4 other_news pe-0">
+        {% if r2c3 %}
+        <a href="{% url 'NewsApp:details' slug=r2c3.slug %}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <img src="{{r2c3.image.url}}" style="width: 96%; height: 150px; margin-right: auto;" >
+        <h6> {{ r2c3.title }} </h6>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r2c3.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+</div> <!-- second inner row div ends here -->
+<div class="row px-3 py-2 border-end border-bottom">
+    <div class="col-4 other_news border-end pe-0">
+        {% if r3c1 %}
+        <a href="{% url 'NewsApp:details' slug=r3c1.slug %}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <img src="{{r3c1.image.url}}" style="width: 96%; height: 150px; margin-right: auto;" >
+        <h6> {{ r3c1.title }} </h6>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r3c1.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+    <div class="col-4 other_news border-end pe-0">
+        {% if r3c2 %}
+        <a href="{% url 'NewsApp:details' slug=r3c2.slug %}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <img src="{{r3c2.image.url}}" style="width: 96%; height: 150px; margin-right: auto;" >
+        <h6> {{ r3c2.title }} </h6>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r3c2.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+    <div class="col-4 other_news pe-0">
+        {% if r3c3 %}
+        <a href="{% url 'NewsApp:details' slug=r3c3.slug %}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <img src="{{r3c3.image.url}}" style="width: 96%; height: 150px; margin-right: auto;" >
+        <h6> {{ r3c3.title }} </h6>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r3c3.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+</div> <!-- third inner row div ends here -->
+
+</div> <!-- colulm-9 ends here -->
+
+
+    <div class="col-3 border-right border-bottom py-2"> <!-- Advertisment Section -->
+        <center>
+        <h1> Adveritsement </h1>
+        </center>
+        <hr>
+        {% if advertisements %}
+        <div class="row">
+        {% for advertisement in advertisements %}
+                <div class="col-12 mb-2">
+                    <a 
+                    {% if advertisement.link %}
+                    href="{{ advertisement.link }}" 
+                    {% else %}
+                    href = "{% url 'NewsApp:ad_details' pk=advertisement.pk %}"
+                    {% endif %}
+                    target="_blank">
+                        <img src="{{ advertisement.image.url }}" style="width: 100%; height: 150px;" title="{{ adveritsement.title }}" class="border shadow rounded">
+                    </a>
+                </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+</div>  <!-- first row div ends here -->
+
+<div class="row px-3 py-2 border-end border-bottom">
+
+    <div class="col-3 other_news border-end pe-0">
+        {% if r4c1 %}
+        <a href="{% url 'NewsApp:details' slug=r4c1.slug %}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <h6> {{ r4c1.title }} </h6>
+        <p style="font-size: small; color: rgb(161, 161, 161);"> {{ r4c1.content|truncatewords:15 }} </p>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r4c1.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+
+    <div class="col-3 other_news border-end pe-0">
+        {% if r4c2 %}
+        <a href="{% url 'NewsApp:details' slug=r4c2.slug %}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <h6> {{ r4c2.title }} </h6>
+        <p style="font-size: small; color: rgb(161, 161, 161);"> {{ r4c2.content|truncatewords:15 }} </p>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r4c2.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+
+    <div class="col-3 other_news border-end pe-0">
+        {% if r4c3 %}
+        <a href="{% url 'NewsApp:details' slug=r4c3.slug%}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <h6> {{ r4c3.title }} </h6>
+        <p style="font-size: small; color: rgb(161, 161, 161);"> {{ r4c3.content|truncatewords:15 }} </p>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r4c3.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+
+    <div class="col-3 other_news pe-0">
+        {% if r4c4 %}
+        <a href="{% url 'NewsApp:details' slug=r4c4.slug%}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <h6> {{ r4c4.title }} </h6>
+        <p style="font-size: small; color: rgb(161, 161, 161);"> {{ r4c4.content|truncatewords:15 }} </p>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r4c4.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+
+</div> <!-- fourth inner row div ends here -->
+
+
+<div class="row px-3 py-2 border-end border-bottom">
+    <div class="col-3 other_news border-end pe-0">
+        {% if r5c1 %}
+        <a href="{% url 'NewsApp:details' slug=r5c1.slug%}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <h6> {{ r5c1.title }} </h6>
+        <p style="font-size: small; color: rgb(161, 161, 161);"> {{ r5c1.content|truncatewords:15 }} </p>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r5c1.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+
+    <div class="col-3 other_news border-end pe-0">
+        {% if r5c2 %}
+        <a href="{% url 'NewsApp:details' slug=r5c2.slug%}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <h6> {{ r5c2.title }} </h6>
+        <p style="font-size: small; color: rgb(161, 161, 161);"> {{ r5c2.content|truncatewords:15 }} </p>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r5c2.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+
+    <div class="col-3 other_news border-end pe-0">
+        {% if r5c3 %}
+        <a href="{% url 'NewsApp:details' slug=r5c3.slug%}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <h6> {{ r5c3.title }} </h6>
+        <p style="font-size: small; color: rgb(161, 161, 161);"> {{ r5c3.content|truncatewords:15 }} </p>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r5c3.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+
+    <div class="col-3 other_news pe-0">
+        {% if r5c4 %}
+        <a href="{% url 'NewsApp:details' slug=r5c4.slug%}" style="text-decoration: none; color: black; margin: 0px; padding: 0px;">
+        <h6> {{ r5c4.title }} </h6>
+        <p style="font-size: small; color: rgb(161, 161, 161);"> {{ r5c4.content|truncatewords:15 }} </p>
+        <p style="font-size: xx-small;"><b> Published on :</b> {{r5c4.created}} </p></a>
+        {% else %}
+        <p>No News available</p>
+        {% endif %}
+    </div>
+
+</div> <!-- fifth inner row div ends here -->
+
+{% endblock %}

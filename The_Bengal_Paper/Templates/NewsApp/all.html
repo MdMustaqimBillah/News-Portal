@@ -1,0 +1,74 @@
+{% extends 'nav2.html' %}
+{% load static %}
+{% block title_block %} All News {% endblock %}
+
+{% block style_block %}
+
+<style>
+    a{
+        color: black!important;
+        text-decoration: none;
+    }
+   .home{
+    margin-top: 75px;
+   }
+</style>
+
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="row home">
+
+        <div class="col-9 border-end">
+            {% for article in articles %}
+
+            <div class="row border-bottom px-3 py-2">
+                <div class="col-4">
+                    <a href="{% url 'NewsApp:details' slug=article.slug %}">
+                        <img src="{{ article.image.url }}" alt="image not found" class="article_image mx-atuo" style="width: 96%; height: 100px;">
+                    </a>
+                </div>
+                <div class="col-8">
+                    <a href="{% url 'NewsApp:details' slug=article.slug %}">
+                        <h6> {{ article.title }} </h6>
+                        <p style="font-size: small; color: rgb(161, 161, 161);"> {{ article.content|truncatewords:25 }} </p>
+                        <p style="font-size: xx-small;"><b> Published on :</b> {{article.created}} </p>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+
+            <center> <h6> No news available related to this topic </h6> </center>
+
+            {% endfor %}
+        </div>
+
+        <div class="col-3">
+            <center>
+                <h1> Adveritsement </h1>
+            </center>
+            <hr>
+            {% if advertisements %}
+            <div class="row">
+            {% for advertisement in advertisements %}
+                    <div class="col-12 mb-2">
+                        <a 
+                        {% if advertisement.link %}
+                        href="{{ advertisement.link }}" 
+                        {% else %}
+                        href = "{% url 'NewsApp:ad_details' pk=advertisement.pk %}"
+                        {% endif %}
+                        target="_blank">
+                            <img src="{{ advertisement.image.url }}" style="width: 100%; height: 150px;" title="{{ adveritsement.title }}" class="border shadow rounded">
+                        </a>
+                    </div>
+            {% endfor %}
+            </div>
+            {% endif %}
+            <hr>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title_block %} Advertisment {% endblock %}
+
+{% block style_block %}
+
+<style>
+    form{
+        width: 40%;
+        margin: auto;
+        padding: 2%;
+        margin-bottom: 5%;
+        border: 1px;
+        }
+    p{
+        margin-top: 5px;
+        margin-bottom: 0px;
+        font: Times New Roman;
+    }
+    button{
+        width:100%;
+        margin-top: 2%;
+    }
+    .home{
+        width: 40%;
+        margin: auto;
+        margin-top: 5%;
+    }
+    a{
+        color: black!important;
+        text-decoration: none;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block form_block %}
+<div class="row home border rounded mb-2">
+    <div class="col-6 btn-sm border-end rounded"><div class="row" style="width: 100%;"> <a href="{% url 'NewsApp:publish' %}" ><div class="col-11"><center> Articles </center></div></a> </div></div>
+
+    <div class="col-6 btn-sm border-end bg-secondary rounded"><div class="row" style="width: 100%;"> <a href="" ><div class="col-11 text-light"><center> Advertisment </center></div></a> </div></div>
+</div>
+
+ <form method="POST"  enctype="multipart/form-data" class="rounded bg-body-tertiary shadow border-top">
+    <center> <h6>Adevertisment</h6> </center>
+    <center><hr style="margin-top: 0%; width: 50%;"></center>
+    {{ form|crispy }}
+    {% csrf_token %}
+    <center>
+    <button type="submit" class="btn btn-primary">Publish</button>
+    </center>
+ </form>
+
+{% endblock %}

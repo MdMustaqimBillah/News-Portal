@@ -1,0 +1,68 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block title_block %} {{ article.title }} {% endblock %}
+{% block style_block %}
+
+<style>
+.home{
+    margin-top: 75px;
+}
+
+
+</style>
+
+{% endblock %}
+
+{% block body_block %}
+<div class="row home">
+
+    <div class="containner px-5 col-9 border-end">
+
+        <img style="width: 100%; height: 340px;" src="{{ article.image.url }}" alt="{{ article.title }}" class="mt-2 rounded border">
+        
+        <div style="text-align: justify; width: 100%;">
+            <h1> {{ article.title }} </h1>
+            <hr>
+            <p>
+            {{ half_content|linebreaks }}
+            {% if article.article_ad %}
+            <a
+                {% if article_ad.link %}
+                href="{{ article_ad.link }}" 
+                {% else %}
+                href = "{% url 'NewsApp:article_ad' slug=article.slug %}"
+                {% endif %}
+                target="_blank">
+            <div class="row" style="width: 100%;">
+                
+            <img style="width: 60%; height: 340px; margin: auto;" src="{{ article.article_ad.url }}" alt="adveritsement" class="my-2 rounded border">
+               
+            </div>
+            </a>
+            {% endif %}
+
+            {{ rest_content|linebreaks }}
+            </p>
+        </div>
+
+    </div>
+    <div class="col-3" style="max-height: 1080px;;">
+        {% for single_article in all_articles %}
+        {% if single_article.slug != article.slug %}
+        <div class="card mt-2 border shadow bg-body-secondary" style="width: 96%">
+            <a href="{% url 'NewsApp:details' slug=single_article.slug %}" style="color: black; text-decoration: none;">
+            <center>
+            <img src="{{single_article.image.url}}" class="card-img-top mt-2" alt="..." style="width: 50%; height: 100px; border-radius: 50%;">
+            </center>
+            <div class="card-bodypt-0" style="text-align: center;">
+              <h6 class="card-text">{{single_article.title}}</h6>
+              <p style="font-size: xx-small;"> {{single_article.created}} </p>
+            </div>
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div><!-- the main row ends here -->
+
+{% endblock %}

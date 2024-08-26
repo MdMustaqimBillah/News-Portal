@@ -1,0 +1,41 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title_block %} {% endblock %} </title>
+    <link
+            rel="icon"
+            href="{{MEDIA_URL}}square.png"
+            type="image/x-icon"
+        />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    
+    {% block style_block %}
+
+    
+    {% endblock %}
+</head>
+<body>
+    {% block form_block %}
+    <form method="POST" class="border shadow bg-body-tertiary rounded">
+        
+        <center> 
+            <h4 style="margin-bottom: 3%;"> Log in to The Bengal Paper </h4>
+            <div class="border bg-warning-subtle rounded" style="margin-bottom: 2%;"> <p style="margin: 6px; padding: 0px;"> You must log in to make any change </p> </div>
+        </center>
+        {{ form|crispy }}
+        {% csrf_token %}
+        
+
+        <center>
+        <button type="submit" class="btn btn-primary my-2"> Login </button>
+        </center>
+        
+    </form>
+    {% endblock %}
+</body>
+</html>

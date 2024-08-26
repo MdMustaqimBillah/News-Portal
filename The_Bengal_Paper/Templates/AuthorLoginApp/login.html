@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block style_block %}
+<style>
+        
+    form{
+    width: 40%;
+    margin: auto;
+    padding: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    
+    }
+    p{
+        margin-top: 5px;
+        margin-bottom: 0px;
+        font: Times New Roman;
+    }
+    button{
+        width: 100%;
+    }
+
+</style>
+
+{% endblock %}
+
+
+</head>
+<body>
+ 
+    {% block form_block %}
+    <form method="POST" class="border shadow bg-body-tertiary rounded">
+        <center> 
+            <h4 style="margin-bottom: 3%;"> Log in to The Bengal Paper </h4>
+            <div class="border bg-warning-subtle rounded" style="margin-bottom: 2%;"> <p style="margin: 6px; padding: 0px;"> You must log in to make any change </p> </div>
+        </center>
+        {{ form|crispy }}
+        {% csrf_token %}
+        
+
+        <center>
+        <button type="submit" class="btn btn-primary my-2"> Login </button>
+        </center>
+    </form>
+    {% endblock %}
+</body>
+</html>

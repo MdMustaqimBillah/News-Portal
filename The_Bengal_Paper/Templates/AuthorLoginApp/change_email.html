@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block style_block %}
+<style>
+
+form{
+    width: 40%;
+    margin: auto;
+    padding: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    
+    }
+    p{
+        margin-top: 5px;
+        margin-bottom: 0px;
+        font: Times New Roman;
+    }
+    button{
+        width: 100%;
+    }
+    </style>
+    
+{% endblock %}
+
+
+{% block form_block %}
+
+<form method="POST" class="border shadow bg-body-tertiary rounded">
+        <center>
+            <div class="border bg-warning-subtle rounded fs-6" style="margin-bottom: 2%;"> <p style="margin: 6px; padding: 0px;"> Want to change your email? </p> </div>
+        </center>
+        {{ form|crispy }}
+        {% csrf_token %}
+        
+
+        <center>
+        <button type="submit" class="btn btn-primary my-2"> Confirm ? </button>
+        </center>
+    </form>
+
+{% endblock %}
