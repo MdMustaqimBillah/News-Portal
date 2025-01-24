@@ -2,8 +2,6 @@ from django.db import models
 from AuthorLoginApp.models import User
 from django.utils import timezone
 
-# Create your models here.
-
 class NewsArticle(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= 'articles')
     title = models.CharField(max_length=200)
