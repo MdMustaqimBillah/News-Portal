@@ -1,0 +1,12 @@
+crispy-bootstrap5    
+Django               
+django-browser-reload
+django-cleanup        
+django-crispy-forms   
+Jinja2               
+mysqlclient       
+pillow               
+Pygments             
+PyYAML                
+requests              
+sqlparse              
